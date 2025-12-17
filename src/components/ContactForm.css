@@ -1,0 +1,118 @@
+.contact-container {
+  position: fixed;
+  top: 50%;
+  right: 3rem;
+  transform: translateY(-50%);
+  z-index: 102;
+  pointer-events: none;
+  margin-left: auto;
+}
+
+.contact-box {
+  padding: 1.5rem;
+  min-width: 280px;
+  max-width: 320px;
+  pointer-events: all;
+}
+
+.contact-box h2 {
+  margin: 0 0 1rem 0;
+  color: #f6f8ff;
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: 800;
+}
+
+.form-group {
+  margin-bottom: 0.75rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.6rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0;
+  font-size: 0.9rem;
+  transition: border-color 0.3s, background 0.3s;
+  font-family: inherit;
+  color: #f6f8ff;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #bfc3ca;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #a846a0;
+  background: rgba(255,255,255,0.08);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.65rem;
+  background: #a846a0;
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168, 70, 160, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.status-message {
+  padding: 0.6rem;
+  border-radius: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  text-align: center;
+  animation: slideIn 0.3s ease-out;
+}
+
+.status-message.success {
+  background: rgba(168, 70, 160, 0.15);
+  border: 1px solid rgba(168, 70, 160, 0.3);
+  color: #a846a0;
+}
+
+.status-message.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

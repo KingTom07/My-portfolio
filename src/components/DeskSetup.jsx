@@ -1,4 +1,8 @@
-export default function DeskSetup() {
+import { useState } from 'react'
+
+export default function DeskSetup({ onComputerClick, computerMode }) {
+  const [hovered, setHovered] = useState(false)
+
   return (
     <group position={[0, -0.5, 0.5]} rotation={[0, Math.PI, 0]}>
       {/* Desk */}
@@ -43,10 +47,20 @@ export default function DeskSetup() {
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
 
-      {/* Laptop Screen Display */}
-      <mesh position={[0, 0.05, -0.07]} rotation={[-2.5, 0, 0]}>
+      {/* Laptop Screen Display - CLICKABLE */}
+      <mesh
+        position={[0, 0.05, -0.07]}
+        rotation={[-2.5, 0, 0]}
+        onClick={onComputerClick}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+      >
         <boxGeometry args={[0.55, 0.35, 0.01]} />
-        <meshStandardMaterial color="#272d2d" emissive="#272d2d" emissiveIntensity={0.3} />
+        <meshStandardMaterial
+          color={hovered ? "#2a3535" : "#272d2d"}
+          emissive={hovered ? "#2a3535" : "#272d2d"}
+          emissiveIntensity={hovered ? 0.5 : 0.3}
+        />
       </mesh>
 
       {/* Code lines on screen */}

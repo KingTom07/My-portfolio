@@ -31,6 +31,30 @@
   --danger: #ff6b6b;
   --info: #60a5fa;
 
+  /* 3D Scene colors */
+  --green-accent: #23ce6b;
+  --green-light: #56e88e;
+  --green-neon: #00ff00;
+  --yellow-highlight: #ffff00;
+  --red-indicator: #ff0000;
+
+  /* GitHub theme colors for terminal */
+  --github-bg: #0d1117;
+  --github-surface: #161b22;
+  --github-border: #30363d;
+  --github-text: #c9d1d9;
+  --github-muted: #8b949e;
+  --github-link: #58a6ff;
+  --github-green: #7ee787;
+
+  /* Material colors for 3D objects */
+  --wood-dark: #5d4a37;
+  --metal-dark: #1a1a1a;
+  --metal-light: #2d2d2d;
+  --screen-dark: #272d2d;
+  --screen-light: #2a3535;
+  --wall-grey: #d1d5db;
+
   /* Spacing */
   --gap-xs: 0.4rem;
   --gap: 1rem;
@@ -1316,6 +1340,82 @@ p { margin: 0 0 1rem 0; color: var(--muted); font-size: 1.1rem; }
   width: 20px;
   height: 20px;
   color: #0A66C2;
+}
+
+/* Project Styling - Clean & Minimal */
+.project-image-container {
+  margin-bottom: 1.5rem;
+}
+
+.project-image-container a {
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-image-container a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-screenshot-clean {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.project-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-tag {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-secondary);
+  color: var(--primary-light);
+  border-radius: 20px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+  background: var(--primary-light);
+  color: var(--bg);
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+}
+
+.project-link:hover {
+  color: var(--primary-light);
+}
+
+.project-link svg {
+  flex-shrink: 0;
 }
 
 .section-subtitle {

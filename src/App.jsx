@@ -15,7 +15,6 @@ function App() {
   const projectIntroRef = useRef(null);
   const project1Ref = useRef(null);
   const project2Ref = useRef(null);
-  const project3Ref = useRef(null);
   const expIntroRef = useRef(null);
   const exp1Ref = useRef(null);
   const exp2Ref = useRef(null);
@@ -31,7 +30,6 @@ function App() {
     projectIntroRef,
     project1Ref,
     project2Ref,
-    project3Ref,
     contactRef
   ];
 
@@ -88,6 +86,14 @@ function App() {
       const prevSection = currentSection - 1;
       setCurrentSection(prevSection);
       sections[prevSection].current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Navigate to specific section (for 3D navigation)
+  const navigateToSection = (sectionIndex) => {
+    if (sectionIndex >= 0 && sectionIndex < sections.length) {
+      setCurrentSection(sectionIndex);
+      sections[sectionIndex].current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -200,14 +206,9 @@ function App() {
         <ProjectDetail key={`project-1-${currentSection}`} project={projects[1]} index={1} total={projects.length} />
       </section>
 
-      {/* Project 3 */}
-      <section ref={project3Ref} className="content-section story-section">
-        <ProjectDetail key={`project-2-${currentSection}`} project={projects[2]} index={2} total={projects.length} />
-      </section>
-
       {/* Contact Section */}
       <section ref={contactRef} className="content-section story-section">
-        <Contact />
+        <Contact onNavigate={navigateToSection} />
 
         <footer className="container footer">
           © <span id="year"></span> Tom Sammon

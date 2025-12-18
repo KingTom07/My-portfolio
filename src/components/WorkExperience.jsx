@@ -117,7 +117,7 @@ const experiences = [
       content: "My takeaway from today's show is the age of digital transformation and lifelong learning...",
       image: null // Add your post image path here if you have one
     },
-    description: "Business development and relationship manager of Step8up UK, My mission is to keep learning, keep building, and keep helping others grow through technology, and help learners recruit and Upskill through today's tech market.",
+    description: "<p> Business development and relationship manager of Step8up UK, My mission is to keep learning, keep building, and keep helping others grow through technology, and help learners recruit and Upskill through today's tech market. </p>",
     achievements: [
       "Developed modular curriculum with weekly builds",
       "Taught Git/GitHub, code reviews, and CI basics",
@@ -129,7 +129,7 @@ const experiences = [
     company: "Step8Up",
     period: "Sep 2024 — Present",
     website: "https://www.step8up.co.uk/",
-    description: "TA and Talent aqquisition manager to the future of Web development specialists and guru's",
+    description: "<p> TA and Talent aqquisition manager to the future of Web development specialists and guru's </p>",
     linkedInPost: {
       postUrl: "https://www.linkedin.com/posts/jeevs_confidence-real-pitching-activity-7402621041774215168-6-b1?utm_source=share&utm_medium=member_desktop",
       author: "Tom Sammon",
@@ -149,7 +149,7 @@ const experiences = [
     company: "Ai CRM (Soon to come)",
     period: "Dec 2024 — Present",
     website: null,
-    description: "Bridging the gab between Artificial Intelligence and Client Relationships, utilizing AI as a tool for managing work flow B2B relationships",
+    description: "<p> Bridging the gab between Artificial Intelligence and Client Relationships, utilizing AI as a tool for managing work flow B2B relationships </p>",
     linkedInPost: null,
     achievements: [
       "Contributed to 3 major product releases",

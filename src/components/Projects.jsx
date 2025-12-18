@@ -72,41 +72,43 @@ const ProjectDetail = forwardRef(({ project, index, total }, ref) => {
           </p>
         </div>
 
-        {/* Right Side: Image, Tech Stack, Features, Link */}
+        {/* Right Side: Project Visual */}
         <div className={`detail-right ${showRightSide ? 'visible' : ''}`}>
-          {/* GitHub Image Link */}
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="project-image-link"
-          >
-            <img
-              src={project.image}
-              alt={`${project.title} preview`}
-              className="project-image"
-            />
-            <div className="github-overlay">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.2-3.37-1.2c-.45-1.16-1.1-1.47-1.1-1.47c-.9-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.89 1.52 2.34 1.08 2.91.83c.09-.65.35-1.08.63-1.33c-2.22-.25-4.56-1.11-4.56-4.95c0-1.09.39-1.98 1.03-2.68c-.1-.25-.45-1.28.1-2.65c0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.74-1.02 2.74-1.02c.55 1.37.2 2.4.1 2.65c.64.7 1.03 1.59 1.03 2.68c0 3.85-2.34 4.7-4.57 4.95c.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2"/>
-              </svg>
-              <span>View on GitHub</span>
+          {/* Project Image/Screenshot */}
+          {project.image && (
+            <div className="project-image-container">
+              <a href={project.github} target="_blank" rel="noreferrer">
+                <img src={project.image} alt={`${project.title} preview`} className="project-screenshot-clean" />
+              </a>
             </div>
-          </a>
+          )}
 
-          {/* Tech Stack Badges */}
-          <div className="detail-tech">
-            <h4 className="detail-section-heading">Tech Stack</h4>
-            <div className="tech-badges">
-              {project.tech.map((tech, idx) => (
-                <span key={idx} className="tech-badge">{tech}</span>
-              ))}
-            </div>
+          {/* Tech Stack */}
+          <div className="project-tech-list">
+            {project.tech.map((tech, idx) => (
+              <span key={idx} className="tech-tag">{tech}</span>
+            ))}
           </div>
 
-          <a href={project.link} className="btn btn-primary">
-            View Project →
-          </a>
+          {/* Project Links */}
+          <div className="project-links">
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noreferrer" className="project-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.2-3.37-1.2c-.45-1.16-1.1-1.47-1.1-1.47c-.9-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.89 1.52 2.34 1.08 2.91.83c.09-.65.35-1.08.63-1.33c-2.22-.25-4.56-1.11-4.56-4.95c0-1.09.39-1.98 1.03-2.68c-.1-.25-.45-1.28.1-2.65c0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.74-1.02 2.74-1.02c.55 1.37.2 2.4.1 2.65c.64.7 1.03 1.59 1.03 2.68c0 3.85-2.34 4.7-4.57 4.95c.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2"/>
+                </svg>
+                <span>GitHub</span>
+              </a>
+            )}
+            {project.link && project.link !== "#" && (
+              <a href={project.link} target="_blank" rel="noreferrer" className="project-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                </svg>
+                <span>Live Site</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -116,44 +118,19 @@ const ProjectDetail = forwardRef(({ project, index, total }, ref) => {
 const projects = [
   {
     title: "My Portfolio",
-    description: "An immersive, story-driven portfolio featuring interactive typewriter animations, seamless keyboard navigation, and dynamic theme switching. Built with modern web technologies and optimized for performance, this portfolio showcases my journey through elegant, accessible design and smooth user experiences.",
+    description: "<p> An immersive, story-driven portfolio featuring interactive typewriter animations, seamless keyboard navigation, and dynamic theme switching. Built with modern web technologies and optimized for performance, this portfolio showcases my journey through elegant, accessible design and smooth user experiences. </p>",
     tech: ["React", "Vite", "Node.js", "Three.js", "CSS", "HTML"],
-    features: [
-      "Interactive 3D elements with Three.js",
-      "Custom typewriter effect and animations",
-      "Dark/Light theme toggle with 'T' shortcut",
-      "Keyboard-first navigation (Enter/Space)",
-      "Express backend for contact form"
-    ],
-    link: "#",
-    github: "https://github.com/KingTom07/My-portfolio.git",
-    image: "/images/project1.png"
+    readme: "Interactive portfolio with typewriter animations and keyboard navigation. Built with React, Vite, and Three.js.",
+    github: "https://github.com/KingTom07/My-portfolio",
+    image: "/images/portfolio.jpg"
   },
   {
-    title: "SaaS Analytics Dashboard",
-    description: "Real-time charts with RBAC and export tools for enterprise data visualization.",
-    tech: ["React", "D3.js", "Node.js"],
-    features: [
-      "38% bundle size reduction via code-splitting",
-      "Full keyboard navigation",
-      "Screen reader accessibility"
-    ],
-    link: "#",
-    github: "https://github.com/yourusername/saas-dashboard",
-    image: "/images/project2.png"
-  },
-  {
-    title: "E-commerce Microsite",
-    description: "High-performance landing pages with optimized CLS/LCP and A/B testing.",
-    tech: ["Next.js", "TypeScript", "Tailwind"],
-    features: [
-      "21% increase in add-to-cart rate",
-      "Lazy-loaded images & font optimization",
-      "SEO-optimized structure"
-    ],
-    link: "#",
-    github: "https://github.com/yourusername/ecommerce-microsite",
-    image: "/images/project3.png"
+    title: "TypeTurtle",
+    description: "<p> A retro-styled typing speed game that challenges users to test their WPM and accuracy. Features a full authentication system with online leaderboards powered by SQL, real-time performance tracking, and a nostalgic aesthetic design. Compete globally and track your progress as you improve your typing skills. </p>",
+    tech: ["JavaScript", "Kotlin", "SQL", "CSS"],
+    link: "https://github.com/KingTom07/TypeTurtle",
+    github: "https://github.com/KingTom07/TypeTurtle",
+    image: "/images/typeturtle.jpg"
   }
 ];
 

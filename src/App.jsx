@@ -56,8 +56,7 @@ function App() {
 
     // Prevent mouse wheel scrolling
     window.addEventListener('wheel', preventScroll, { passive: false });
-    // Prevent touch scrolling
-    window.addEventListener('touchmove', preventScroll, { passive: false });
+    // Note: touchmove is handled separately for swipe detection
     // Prevent arrow key scrolling
     window.addEventListener('keydown', (e) => {
       if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.key)) {
@@ -67,7 +66,6 @@ function App() {
 
     return () => {
       window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
     };
   }, []);
 
@@ -142,6 +140,50 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [toggleTheme]);
 
+  // Touch/Swipe navigation for mobile
+  useEffect(() => {
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const minSwipeDistance = 50; // Minimum distance for a swipe
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      // Prevent default scrolling while detecting swipe
+      e.preventDefault();
+    };
+
+    const handleTouchEnd = (e) => {
+      touchEndY = e.changedTouches[0].clientY;
+      handleSwipe();
+    };
+
+    const handleSwipe = () => {
+      const swipeDistance = touchStartY - touchEndY;
+
+      // Swipe up (moving finger upward) - go to next section
+      if (swipeDistance > minSwipeDistance) {
+        navigateToNextSection();
+      }
+      // Swipe down (moving finger downward) - go to previous section
+      else if (swipeDistance < -minSwipeDistance) {
+        navigateToPreviousSection();
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [currentSection]);
+
   return (
     <div className="page story-mode">
       {/* Hero Section */}
@@ -165,7 +207,7 @@ function App() {
             </p>
 
             <p className="intro-hint">
-              Press <code>Enter</code> to continue · <code>Space</code> to go back
+              Press <code>Enter</code> to continue · <code>Space</code> to go back · Swipe to navigate
             </p>
           </div>
         </main>

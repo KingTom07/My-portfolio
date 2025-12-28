@@ -9,16 +9,18 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
+            // Keep React and React-DOM together in one chunk
+            if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
+              return 'react-vendor';
+            }
+            // Three.js in its own chunk
             if (id.includes('three')) {
               return 'three';
             }
+            // React Three Fiber and Drei together
             if (id.includes('@react-three')) {
               return 'react-three';
             }
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'react-vendor';
-            }
-            return 'vendor';
           }
         }
       }

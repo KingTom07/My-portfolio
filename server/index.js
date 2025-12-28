@@ -1,7 +1,7 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -12,9 +12,14 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files from the React app
+app.use(express.static("dist"));
+
 // Email transporter configuration
 const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE || 'gmail',
+  service: process.env.EMAIL_SERVICE || "gmail",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
@@ -22,12 +27,12 @@ const transporter = nodemailer.createTransport({
 });
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Server is running' });
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", message: "Server is running" });
 });
 
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
@@ -35,7 +40,7 @@ app.post('/api/contact', async (req, res) => {
     if (!name || !email || !message) {
       return res.status(400).json({
         success: false,
-        error: 'Please provide name, email, and message'
+        error: "Please provide name, email, and message",
       });
     }
 
@@ -44,7 +49,7 @@ app.post('/api/contact', async (req, res) => {
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         success: false,
-        error: 'Please provide a valid email address'
+        error: "Please provide a valid email address",
       });
     }
 
@@ -58,7 +63,7 @@ app.post('/api/contact', async (req, res) => {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${message.replace(/\n/g, "<br>")}</p>
         <hr>
         <p><em>Sent from your portfolio website</em></p>
       `,
@@ -70,16 +75,20 @@ app.post('/api/contact', async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Email sent successfully'
+      message: "Email sent successfully",
     });
-
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error("Error sending email:", error);
     res.status(500).json({
       success: false,
-      error: 'Failed to send email. Please try again later.'
+      error: "Failed to send email. Please try again later.",
     });
   }
+});
+
+// add a default route to serve the React app for any other requests
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "dist" });
 });
 
 app.listen(PORT, () => {
